@@ -12,6 +12,6 @@ int main()
 
 void calc_esfera(float R, float *area, float *volume)
 {
-    *area = (4.0* P * R^2);
+    *area = 4* P * R * R;
 
 }
