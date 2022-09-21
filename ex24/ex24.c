@@ -5,10 +5,8 @@ void minEmax(int*, int, int *, int *);
 
 int main()
 {
-    int *array, *pArray, tamanho, min, max;
-
-    pArray = *array;
-
+    int *array, tamanho, min = 0, max = 0;
+    
     printf("Digite um tamanho para o array:"); //lendo o tamanho do array
     scanf("%i", &tamanho);
 
@@ -17,10 +15,9 @@ int main()
     for (int i = 0; i < tamanho; i++)
     {
         printf("\nDigite um valor inteiro para array[%i]: ", i);
-        scanf("%i", pArray);
-        printf("array[%i]: %i", i, *pArray);
+        scanf("%i", &array[i]);
+        printf("array[%i]: %i", i, array[i]);
 
-        pArray++;
     }
 
     minEmax(array, tamanho, &min, &max);
@@ -33,21 +30,22 @@ int main()
 
 void minEmax(int *array, int tamanho, int *min, int *max)
 {
-    int auxMin = 0, auxMax = 0;
+    *min = *array;
+    *max = *array;
 
     for (int i = 0; i < tamanho; i++)
     {
         printf("\n*array: %i", *array);
 
-        if (*array < auxMin)
+        if (*array <= *min)
         {
-            auxMin = *array;
+            *min = *array;
         }
         else
         {
-            if (*array >auxMax)
+            if (*array >= *max)
             {
-                auxMax = *array;
+                *max = *array;
             }
             
         }
