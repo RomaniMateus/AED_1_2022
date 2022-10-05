@@ -4,7 +4,7 @@ int main()
 {
     ListaLinearSE lista;
     TipoItem item;
-    int i, n, posicaoTeste;
+    int i, n, posicaoTeste, chaveRemocao;
 
     inicializaLLSE(&lista);
 
@@ -67,8 +67,49 @@ int main()
         }
     
     }
-    
 
+    printf("\n***TESTANDO A RETIRA_DA_POSICAO***");
+    printf("\nPosicao em que esta o item a ser retirado: ");
+    scanf("%i", &posicaoTeste);
+
+    if (!RetiraDaPosicao(&lista, posicaoTeste))
+    {
+        printf("\nNao consegui remover o item desejado...");
+    }
+    else
+    {
+        if(!listaVaziaLLSE(&lista))
+        {
+            printf("\nItens na lista:\n");
+            imprimeListaLLSE(&lista);  
+        }
+        else
+        {
+            printf("\nLista Vazia.\n");
+        }
+    }
+    
+    printf("\n***TESTANDO A RETIRA_ESPECIFICO***");
+    printf("\nDigite a chave correspondente ao item que deseja excluir: ");
+    scanf("%i", &chaveRemocao);
+
+    if (!RetiraEspecifico(&lista, chaveRemocao))
+    {
+        printf("\nNao consegui remover o item...");
+    }
+    else
+    {
+        if(!listaVaziaLLSE(&lista))
+        {
+            printf("\nItens na lista:\n");
+            imprimeListaLLSE(&lista);  
+        }
+        else
+        {
+            printf("\nLista Vazia.\n");
+        }
+    }
+    
     // if(!removeDoFinalLLSE(&lista,&item))
     // {
     //     printf("Erro! Lista Vazia!\n");

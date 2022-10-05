@@ -102,30 +102,76 @@ int AdicionaNaPosicao(ListaLinearSE *lista, TipoItem item, int posicao)
 {
     int x, posicaoReal = posicao - 1;
 
-    if (posicao > lista->ultimo + 1)
+    if (!listaCheiaLLSE(lista))
+    {
+        if (posicao > lista->ultimo + 1)
+        {
+            return 0;
+        }
+        else
+        {
+            if (posicao == lista->ultimo + 1)
+            {
+                return x = insereNoFinalLLSE(lista, item);
+            }
+            else
+            {
+                lista->ultimo++;
+
+                for (int i = lista->ultimo; i > 0 ; i--)
+                {
+                    lista->itens[i] = lista->itens[i - 1];
+                }
+                
+                lista->itens[posicaoReal] = item;
+
+                return 1;
+            }
+            
+        }
+    }
+    else
+    {
+        return 0;
+    }   
+        
+}
+
+int RetiraDaPosicao(ListaLinearSE *lista, int posicao)
+{
+    if (posicao > lista->ultimo)
     {
         return 0;
     }
     else
     {
-        if (posicao == lista->ultimo + 1)
+        lista->ultimo--;
+        for (int i = posicao - 1; i < lista->ultimo; i++)
         {
-            return x = insereNoFinalLLSE(lista, item);
+            lista->itens[i] = lista->itens[i + 1];
         }
-        else
-        {
-            lista->ultimo++;
-
-            for (int i = lista->ultimo; i > 0 ; i--)
-            {
-                lista->itens[i] = lista->itens[i - 1];
-            }
-            
-            lista->itens[posicaoReal] = item;
-
-            return 1;
-        }
-        
+        return 1;
     }
     
+}
+
+int RetiraEspecifico(ListaLinearSE *lista, int chave)
+{
+    if (listaVaziaLLSE(lista))
+    {
+        return 0;
+    }
+    else
+    {
+        for (int i = 0; i < lista->ultimo; i++)
+        {
+            printf("\nlista->itens[%i]->chave: %i", i, lista->itens[i].chave);
+            printf("\nchave: %i", chave);
+
+            if (lista->itens[i].chave == chave)
+            {
+                RetiraDaPosicao(lista, i + 1);
+            }   
+        }  
+    }
 }

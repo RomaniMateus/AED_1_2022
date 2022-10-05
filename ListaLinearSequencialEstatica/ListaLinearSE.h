@@ -24,3 +24,5 @@ int insereNoInicioLLSE(ListaLinearSE*,TipoItem);
 int removeDoFinalLLSE(ListaLinearSE*,TipoItem*);
 int removeDoInicioLLSE(ListaLinearSE*,TipoItem*);
 int AdicionaNaPosicao(ListaLinearSE *, TipoItem , int);
+int RetiraDaPosicao(ListaLinearSE *, int);
+int RetiraEspecifico(ListaLinearSE *, int);
