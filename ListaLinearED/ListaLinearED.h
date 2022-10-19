@@ -2,19 +2,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct{
+typedef struct
+{
   int chave;
   char nome[30];
 } TipoItem;
 
-struct noh{
+struct noh
+{
   TipoItem item;
   struct noh *prox;
 };
 
 typedef struct noh TipoNoh;
 
-typedef struct{
+typedef struct
+{
   TipoNoh *inicioLista;
   int ultimo;
 } ListaLinearED;
@@ -28,3 +31,5 @@ int insereNoFinalLLED(ListaLinearED*,TipoItem);
 int insereNoInicioLLED(ListaLinearED*,TipoItem);
 int removeDoFinalLLED(ListaLinearED*,TipoItem*);
 int removeDoInicioLLED(ListaLinearED*,TipoItem*);
+int adicionaNaPosicao(ListaLinearED*, TipoItem, int);
+int retiraDaPosicao(ListaLinearED*, TipoItem*, int);
