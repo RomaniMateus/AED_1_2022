@@ -13,7 +13,7 @@ int main()
     for (int i = 0; i < tamanho; i++)
     {
         printf("\nDigite um valor inteiro para array[%i]:", i);
-        scanf("%i", array)
+        scanf("%i", array);
     }
     
     return 0;
