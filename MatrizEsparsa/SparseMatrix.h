@@ -24,10 +24,12 @@ typedef MATRIX* pMATRIX;
 
 void errorMessage();
 void printMenu();
-void initializeMatrix(pMATRIX);
-int invalidNumber(pMATRIX, int*, int*);
-void destroyNode(pMATRIX, pNODE, pNODE, int*);
-int assignValue(pMATRIX, int*, int*, int*);
-// int accessValue(pMATRIX, int, int);
-void getValueAndCoordinates(int*, int*, int*);
 void printMatrix(pMATRIX);
+void destroyNode(pMATRIX, pNODE, pNODE, int*);
+// void destroyMatrix(pMATRIX);
+pMATRIX initializeMatrix(pMATRIX);
+int invalidNumber(pMATRIX, int*, int*);
+int assignValue(pMATRIX, int*, int*, int*);
+int accessValue(pMATRIX, int, int);
+void getValueAndCoordinates(int*, int*, int*);
+

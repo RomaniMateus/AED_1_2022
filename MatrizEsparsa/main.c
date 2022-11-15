@@ -7,12 +7,12 @@ int main()
 
     pMATRIX matrix;
 
-    initializeMatrix(matrix);
+    matrix = initializeMatrix(matrix);
 
     do
     {
         printMenu();
-        scanf("\n%d", &selectedOption);
+        scanf("%d", &selectedOption);
 
         switch (selectedOption)
         {
@@ -26,6 +26,7 @@ int main()
             break;
 
             case 3:
+                // destroyMatrix(matrix);
                 printf("\nLeaving program...");
             break;
         

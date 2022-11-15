@@ -6,10 +6,11 @@ void errorMessage()
 }
 void printMenu()
 {
-    printf("Select an option: ");
+    printf("\nSelect an option: ");
     printf("\n(1)Insert a value (to delete a value, set his value to 0):");
     printf("\n(2)Display matrix");
-    printf("\n(3)Leave program");
+    printf("\n(3)Leave program\n");
+    printf("Option: ");
 }
 
 void getValueAndCoordinates(int* value, int* insertionLine, int* insertionColumn)
@@ -22,7 +23,26 @@ void getValueAndCoordinates(int* value, int* insertionLine, int* insertionColumn
     scanf("%d", insertionColumn);  
 }
 
-void initializeMatrix(pMATRIX matrix)
+void printMatrix(pMATRIX matrix)
+{
+    int storedValue;
+    for (int i = 0; i < matrix->lines; i++)
+    {
+        for (int j = 0; j < matrix->columns; j++)
+
+        {
+            storedValue = accessValue(matrix, i, j);
+            if (storedValue == 0)
+                printf("0\t");
+            else
+                printf("%d\t", storedValue);
+        }
+        printf("\n");
+    }
+      
+}
+
+pMATRIX initializeMatrix(pMATRIX matrix)
 {
     int lines, columns;
     printf("Number of lines: ");
@@ -33,10 +53,13 @@ void initializeMatrix(pMATRIX matrix)
 
     matrix->lines = lines;
     matrix->columns = columns;
+
     matrix->A = (pNODE*) malloc(lines * sizeof(pNODE));
 
     for (int i = 0; i < lines; i++)
         matrix->A[i] = NULL;
+    
+    return matrix;
 }
 
 int invalidNumber(pMATRIX matrix,int* line, int* column)
@@ -44,15 +67,6 @@ int invalidNumber(pMATRIX matrix,int* line, int* column)
     return *line < 0 || *line >= matrix->lines || *column < 0 || *column >= matrix->columns;
 }
 
-void destroyNode(pMATRIX matrix, pNODE previous, pNODE present, int* line)
-{
-    if (previous == NULL)
-        matrix->A[*line] = present->next;
-    else
-        previous->next = present->next;
-
-    free(present);
-}
 
 int assignValue(pMATRIX matrix, int* line, int* column, int* value)
 {
@@ -60,7 +74,6 @@ int assignValue(pMATRIX matrix, int* line, int* column, int* value)
         return 0;
     else
     {
-        
         pNODE previous = NULL;
         pNODE present = matrix->A[*line];
 
@@ -91,23 +104,53 @@ int assignValue(pMATRIX matrix, int* line, int* column, int* value)
     }   
 }
 
-// int accessValue(pMATRIX matrix, int* line, int* column)
-// {
-//     if (invalidNumber(matrix, line, column))
-//         return 0;
-//     else
-//     {
-//         pNODE present = matrix->A[*line];
-
-//         while (present != NULL && present->column < *column)
-//             present = present->next;
-//         if (present != NULL && present->column == *column)
-//             return present->value;
-//         return 0;
-//     }
-// }
-
-void printMatrix(pMATRIX matrix)
+int accessValue(pMATRIX matrix, int line, int column)
 {
-    printf("\nprinting matrix");
+    if (invalidNumber(matrix, &line, &column))
+        return 0;
+    else
+    {
+        pNODE present = matrix->A[line];
+
+        while (present != NULL && present->column < column)
+            present = present->next;
+        if (present != NULL && present->column == column)
+            return present->value;
+        return 0;
+    }
 }
+
+void destroyNode(pMATRIX matrix, pNODE previous, pNODE present, int* line)
+{
+    if (previous == NULL)
+        matrix->A[*line] = present->next;
+    else
+        previous->next = present->next;
+
+    free(present);
+}
+
+// void destroyMatrix(pMATRIX matrix)
+// {
+//     printf("\nentering function");
+//     printf("\nmatrix->lines: %d", matrix->lines);
+//     printf("\nmatrix->columns: %d", matrix->columns);
+//     for (int i = 0; i < matrix->lines; i++)
+//     {
+//         printf("\n*i: %d", *i);
+//         for (int j = 0; j < matrix->columns; j++)
+//         {
+//             pNODE previous = NULL;
+//             pNODE present = matrix->A[i];
+
+//             while (present != NULL && present->column < j) //searching for the node
+//             {
+//                 previous = present;
+//                 present = present->next;
+//             }
+
+//             destroyNode(matrix, previous, present, &i);
+//         }
+//     }
+//     free(matrix);
+// }
