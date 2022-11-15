@@ -18,7 +18,7 @@ int main()
         {
             case 1:
                 getValueAndCoordinates(&value, &insertionLine, &insertionColumn);
-                assignValue(matrix, &insertionLine, &insertionColumn, &value);
+                assignValue(matrix, insertionLine, insertionColumn, value);
             break;
 
             case 2:

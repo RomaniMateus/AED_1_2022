@@ -4,6 +4,7 @@ void errorMessage()
 {
     printf("\nThis is an invalid option!!");
 }
+
 void printMenu()
 {
     printf("\nSelect an option: ");
@@ -62,43 +63,43 @@ pMATRIX initializeMatrix(pMATRIX matrix)
     return matrix;
 }
 
-int invalidNumber(pMATRIX matrix,int* line, int* column)
+int invalidNumber(pMATRIX matrix,int line, int column)
 {
-    return *line < 0 || *line >= matrix->lines || *column < 0 || *column >= matrix->columns;
+    return line < 0 || line >= matrix->lines || column < 0 || column >= matrix->columns;
 }
 
 
-int assignValue(pMATRIX matrix, int* line, int* column, int* value)
+int assignValue(pMATRIX matrix, int line, int column, int value)
 {
     if (invalidNumber(matrix, line, column))
         return 0;
     else
     {
         pNODE previous = NULL;
-        pNODE present = matrix->A[*line];
+        pNODE present = matrix->A[line];
 
-        while (present != NULL && present->column < *column) //searching for the node
+        while (present != NULL && present->column < column) //searching for the node
         {
             previous = present;
             present = present->next;
         }
 
-        if (present != NULL && present->column == *column) //assigning value to an existing node
+        if (present != NULL && present->column == column) //assigning value to an existing node
         {
-            if (*value == 0)
+            if (value == 0)
                 destroyNode(matrix, previous, present, line);
             else
-                present->value = *value;
+                present->value = value;
         }
         else //assigning value to a non-existing node
         {
             pNODE newNode = (pNODE) malloc(sizeof(NODE));
-            newNode->column = *column;
-            newNode->value = *value;
+            newNode->column = column;
+            newNode->value = value;
             newNode->next = present;
 
             if (previous == NULL)
-                matrix->A[*line] = newNode;   
+                matrix->A[line] = newNode;   
         }
         return 1;
     }   
@@ -106,7 +107,7 @@ int assignValue(pMATRIX matrix, int* line, int* column, int* value)
 
 int accessValue(pMATRIX matrix, int line, int column)
 {
-    if (invalidNumber(matrix, &line, &column))
+    if (invalidNumber(matrix, line, column))
         return 0;
     else
     {
@@ -120,10 +121,10 @@ int accessValue(pMATRIX matrix, int line, int column)
     }
 }
 
-void destroyNode(pMATRIX matrix, pNODE previous, pNODE present, int* line)
+void destroyNode(pMATRIX matrix, pNODE previous, pNODE present, int line)
 {
     if (previous == NULL)
-        matrix->A[*line] = present->next;
+        matrix->A[line] = present->next;
     else
         previous->next = present->next;
 
